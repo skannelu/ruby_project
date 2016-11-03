@@ -5,8 +5,9 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+<link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
 </head>
-<body>
+<body class="inner">
 <nav class="navbar navbar-inverse" role="navigation”>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,13 +27,25 @@
         <li>
           <%= link_to 'Add Place', new_place_path %>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login/Sign Up</a></li>
-      </ul>
+       </ul>
+       <ul class="nav navbar-nav navbar-right">
+       <% if user_signed_in? %>
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+       <% else %>
+        <li><%= link_to 'Sign in', new_user_session_path %></li>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+       <% end %>
+       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<% if notice.present? %>
+      <p class="alert alert-info"><%= notice %></p>
+     <% end %>
+     <% if alert.present? %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
 <%= yield %>
 
 </body>

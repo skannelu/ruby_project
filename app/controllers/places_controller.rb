@@ -16,4 +16,5 @@ class PlacesController < ApplicationController
   def place_params
     params.require(:place).permit(:name, :description, :address)
   end
+   before_action :authenticate_user!, only: [:new, :create]
 end
