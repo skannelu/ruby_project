@@ -1,10 +1,10 @@
 <% @places.each do |place| %>
  <div class = "box text-center inner">
-    <h3><%= place.name %></h3>
+    <h1><%= link_to place.name, place_path(place) %></h1><br /> 
     <h3><%= place.address %></h3>
     <h3><%= place.description %></h3>
-     <% if place.user.present? %>
-      <small><%= place.user.email %></small>
-     <% end %>
+    <% if place.user.present? %>
+     <small><%= place.user.email %></small>
+    <% end %>
     </div> <br>
 <% end %>

@@ -14,12 +14,29 @@ class PlacesController < ApplicationController
             render :new, status: :unprocessable_entity
         end
     end
-
-  private
-
-  def place_params
-    params.require(:place).permit(:name, :description, :address)
-  end
-   before_action :authenticate_user!, only: [:new, :create]
+    def show
+     @place = Place.find(params[:id])
+    end
+    def edit
+     @place = Place.find(params[:id])
+    end
+    def update
+     @place = Place.find(params[:id])
+     @place.update_attributes(place_params)
+     redirect_to root_path
+    end
+    def destroy
+     @place = Place.find(params[:id])
+     @place.destroy
+     redirect_to root_path
+    end
+    @comment = Comment.new
+    private
+    def place_params
+     params.require(:place).permit(:name, :description, :address)
+    end
+    before_action :authenticate_user!, only: [:new, :create]
+    
+   
    
 end
